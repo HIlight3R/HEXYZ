@@ -5,6 +5,7 @@ from .models import User
 
 @admin.register(User)
 class CategoryUser(admin.ModelAdmin):
+    """User's admin view class"""
     list_display = ("login", "name", "balance")
     list_filter = ("login", "name", "balance")
     readonly_fields = ("password",)

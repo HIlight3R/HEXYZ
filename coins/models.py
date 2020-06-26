@@ -2,7 +2,7 @@ from django.db import models
 
 
 class User(models.Model):
-    """Class of user"""
+    """Class of user in database"""
     name = models.CharField("Имя", max_length=30)
     login = models.SlugField("Логин", max_length=64, unique=True)
     password = models.SlugField("Хэш пароля")
