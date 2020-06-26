@@ -10,7 +10,7 @@ _Simple bank of virtual money - HEXYZ (HXZ)._
 - Clone the repository or download archive with it.
 - Check your Python version, it should be at least `3.7`.
 - Go to the root of the project directory.
-- Run the following commands in your terminal (in root directory):
+- Run the following commands in your terminal (in the root directory):
   ```
   python manage.py makemigrations
   python manage.py migrate
@@ -18,5 +18,5 @@ _Simple bank of virtual money - HEXYZ (HXZ)._
   (here you will need to enter your login, email and password to get access to control panel)
   python manage.py runserver
   ```
-- You will find your website on http://127.0.0.1:8000 by default. You can change IP and port of your server, added `ip:port` after `... runsever`
+- You will find your website on http://127.0.0.1:8000 by default. You can change IP and port of your server, added `ip:port` after `runsever` argument of the last command.
 - Control panel will be on http://127.0.0.1:8000/admin.
