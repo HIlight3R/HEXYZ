@@ -1,7 +1,7 @@
 <h1 align="center">HEXYZ Project</h1>
 
 <p align="center">
-	<img src="./static/images/logo-small.png" alt="HEXYZ Project logo">
+	<img src="static/images/logo.png" alt="HEXYZ Project logo">
 </p>
 
 <p align="center">Simple bank of virtual money - HEXYZ (HXZ).</p>

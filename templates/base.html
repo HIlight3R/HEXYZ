@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>HEXYZ - {% block title %}Unknown page{% endblock title %}</title>
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -11,39 +12,40 @@
 <div id="wrapper">
     <header>
         <div id="top">
-            <img src="../static/images/logo-small.png" alt="" align="right" border="0" width="256" height="128">
+            <img src="{% static 'images/logo.png' %}" alt="" align="right" border="0" width="256" height="128">
         </div>
         <div class="toptext">HEXYZ Coin WebSite</div>
         <div class="toptextsub">Simple bank of virtual money</div>
         <div class="clear">&nbsp;</div>
         <div id="navilist">
-            <div class="listnavi">
-                <a href="https://github.com/hilight3r">Author's GitHub</a>
-                <a href="https://www.sololearn.com/Profile/11054600">Author's SoloLearn</a>
-                <a href="https://github.com/hilight3r/HEXYZ">This project on GitHub</a>
+            <div class="listnavi" align="center">
+                <a href="https://github.com/hilight3r" target="_blank">Author's GitHub</a>
+                <a href="https://www.sololearn.com/Profile/11054600" target="_blank">Author's SoloLearn</a>
+                <a href="https://github.com/hilight3r/HEXYZ" target="_blank">This project on GitHub</a>
             </div>
         </div>
     </header>
-
     <div class="clear">&nbsp;</div>
-
     <main>
-
         <nav>
             <h2>Navigation</h2>
             <ul>
                 <li><a title="Home" href="/">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a title="Log out" href="{% url 'account_logout' %}">Log out</a></li>
+                {% else %}
+                    <li><a title="Log in" href="{% url 'account_login' %}">Log in</a></li>
+                    <li><a title="Sign up" href="{% url 'account_signup' %}">Sign up</a></li>
+                {% endif %}
             </ul>
         </nav>
-
         <aside>
-            <h2>Pagetext</h2>
-
-            <div class="textboxrighttext">
-                {% block sidebar %}
+            {% block sidetext %}
+                <h2>No content here</h2>
+                <div class="textboxrighttext">
                     <h1 align="center">There are no content in this element...</h1>
-                {% endblock sidebar %}
-            </div>
+                </div>
+            {% endblock sidetext %}
         </aside>
         <article>
             {% block content %}

@@ -1,16 +1,13 @@
+from django.contrib.auth.models import User
 from django.db import models
 
+from .signals import create_profile
 
-class User(models.Model):
+
+class Wallet(models.Model):
     """Class of user in database"""
-    name = models.CharField("Имя", max_length=30)
-    login = models.SlugField("Логин", max_length=64, unique=True)
-    password = models.SlugField("Хэш пароля")
-    balance = models.PositiveIntegerField("Баланс", default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    balance = models.DecimalField(max_digits=12, decimal_places=3, default=0)
 
-    def __str__(self):
-        return self.login
 
-    class Meta:
-        verbose_name = "Пользователь"
-        verbose_name_plural = "Пользователи"
+models.signals.post_save.connect(create_profile, sender=User)

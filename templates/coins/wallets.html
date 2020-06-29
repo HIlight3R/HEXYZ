@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+    List of users
+{% endblock %}
+{% block sidetext %}
+    <h2>No content here</h2>
+    <div class="textboxrighttext">
+        <h1 align="center">There are no content in this element...</h1>
+    </div>
+{% endblock sidetext %}
+{% block content %}
+    <h1>User's wallet list</h1>
+    <br>
+    <table>
+        <tr>
+            <th>Wallet ID / User ID</th>
+            <th>Username</th>
+            <th>Balance</th>
+        </tr>
+        {% for wallet in wallet_list %}
+            <tr>
+                {% if wallet.user.id == wallet.id %}
+                    <td>{{ wallet.id }}</td>
+                {% else %}
+                    <td>{{ wallet.user.id }} / {{ wallet.id }}</td>
+                {% endif %}
+                <td>{{ wallet.user.username }}</td>
+                <td>{{ wallet.balance }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

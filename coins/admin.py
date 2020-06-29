@@ -1,23 +1,20 @@
 from django.contrib import admin
 
-from .models import User
+from .models import Wallet
 
 
-@admin.register(User)
-class CategoryUser(admin.ModelAdmin):
-    """User's admin view class"""
-    list_display = ("login", "name", "balance")
-    list_filter = ("login", "name", "balance")
-    readonly_fields = ("password",)
+@admin.register(Wallet)
+class WalletAdmin(admin.ModelAdmin):
+    list_display = ("user", "id", "balance")
+    list_search = ("user", "id", "balance")
+    list_editable = ("balance",)
+    readonly_fields = ("user", "id")
     fieldsets = (
-        ("Основная информация", {
-            "fields": (("name", "balance"),)
+        (None, {
+            "fields": (("id", "balance"), "user")
         }),
-        ("Данные для входа", {
-            "fields": (("login", "password"),)
-        })
     )
 
 
-admin.site.site_title = "Администрирование HEXYZ"
-admin.site.site_header = "Админ-панель HEXYZ"
+admin.site.site_title = "HEXYZ CP"
+admin.site.site_header = "HEXYZ Control panel"
