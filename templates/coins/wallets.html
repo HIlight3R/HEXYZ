@@ -1,12 +1,50 @@
 {% extends 'base.html' %}
-{% block title %}
+{% block head_title %}
     List of users
-{% endblock %}
+{% endblock head_title %}
 {% block sidetext %}
-    <h2>No content here</h2>
-    <div class="textboxrighttext">
-        <h1 align="center">There are no content in this element...</h1>
-    </div>
+    {% if user.is_authenticated %}
+        <h2>Howdy, {{ user.username }}!</h2>
+        <div class="textboxrighttext">
+            {% for wallet in wallet_list %}
+                {% if wallet.user.username == user.username %}
+                    <h1>Account info:</h1>
+                    <ul>
+                        <li>Username: <b>{{ wallet.user.username }}</b></li>
+                        <li>Email: <a href="mailto:{{ wallet.user.email }}">{{ wallet.user.email }}</a></li>
+                        <li>Balance: {{ wallet.balance }} HXZ</li>
+                        <li>Registration datetime: {{ wallet.user.date_joined }}</li>
+                        <li>Account (Wallet) ID: <b>#{{ wallet.id }}</b></li>
+                    </ul>
+                    <h1>Service info:</h1>
+                    <ul>
+                        <li>Total accounts: {{ wallet_list|length }}</li>
+                        {% if total_sum %}
+                            <li>Total balance: {{ total_sum|floatformat }} HXZ</li>
+                        {% else %}
+                            <li>Total balance: 0.0 HXZ</li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>Hello, Anonymous!</h2>
+        <div class="textboxrighttext">
+            <h1>Account info:</h1>
+            <p>You don't have account on this website! Please, <a title="Sign in" href="{% url 'account_login' %}">sign
+                in</a> or <a title="Sign up" href="{% url 'account_signup' %}">sign up</a>.</p>
+            <h1>Service info:</h1>
+            <ul>
+                <li>Total accounts: {{ wallet_list|length }}</li>
+                {% if total_sum %}
+                    <li>Total balance: {{ total_sum|floatformat }} HXZ</li>
+                {% else %}
+                    <li>Total balance: 0.0 HXZ</li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
 {% endblock sidetext %}
 {% block content %}
     <h1>User's wallet list</h1>
@@ -19,11 +57,7 @@
         </tr>
         {% for wallet in wallet_list %}
             <tr>
-                {% if wallet.user.id == wallet.id %}
-                    <td>{{ wallet.id }}</td>
-                {% else %}
-                    <td>{{ wallet.user.id }} / {{ wallet.id }}</td>
-                {% endif %}
+                <td>{{ wallet.id }}</td>
                 <td>{{ wallet.user.username }}</td>
                 <td>{{ wallet.balance }}</td>
             </tr>

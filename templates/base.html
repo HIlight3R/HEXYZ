@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>HEXYZ - {% block title %}Unknown page{% endblock title %}</title>
+    <title>HEXYZ - {% block head_title %}Unknown page{% endblock head_title %}</title>
     <link rel="icon" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,9 +32,9 @@
             <ul>
                 <li><a title="Home" href="/">Home</a></li>
                 {% if user.is_authenticated %}
-                    <li><a title="Log out" href="{% url 'account_logout' %}">Log out</a></li>
+                    <li><a title="Sign out" href="{% url 'account_logout' %}">Sign out</a></li>
                 {% else %}
-                    <li><a title="Log in" href="{% url 'account_login' %}">Log in</a></li>
+                    <li><a title="Sign in" href="{% url 'account_login' %}">Sign in</a></li>
                     <li><a title="Sign up" href="{% url 'account_signup' %}">Sign up</a></li>
                 {% endif %}
             </ul>
