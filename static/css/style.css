@@ -15,7 +15,6 @@ body {
     padding: 20px;
 }
 
-/* oben*/
 header {
     margin: 0;
 }
@@ -79,7 +78,7 @@ div#navilist {
     border-radius: 5px;
 }
 
-/* Navigation links*/
+
 nav {
     width: 20%;
     float: left;
@@ -138,7 +137,6 @@ nav ul a:focus {
     text-decoration: none;
     font-family: tahoma, arial, helvetica, verdana, sans-serif;
     color: #252525;
-    font-weight: normal;
     background-color: #FF7E28;
 }
 
@@ -150,7 +148,7 @@ aside {
 aside h2 {
     color: #ffffff;
     background-color: #181818;
-    font-size: 1.063em;
+    font-size: 1em;
     font-weight: bold;
     margin: 0px 0px 10px 0px;
     padding: 5px;
@@ -169,20 +167,19 @@ aside p {
 }
 
 .textboxrighttext {
-    text-align: justify;
+    text-align: left;
     font-size: 0.750em;
-    font-style: italic;
     border: 1px dashed #808080;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
 }
 
-/* Hauptteil*/
 main {
-    display: block; /*wegen Fehldarstellung IE*/
+    display: block;
 }
 
-/* Inhalt*/
+
 article {
     margin-left: 21%;
     margin-right: 21%;
@@ -262,7 +259,7 @@ footer {
     background-image: -webkit-linear-gradient(#FF7E28 0%, #FFB428 100%);
 }
 
-/* allgemeine Angaben*/
+
 a:link, a:visited, a:active {
     color: #FF7E28;
     background-color: transparent;
@@ -312,13 +309,7 @@ td, tr, th {
     border: #999999 2px solid;
     border-spacing: 10px;
     text-align: center;
-    /*align-content: center;*/
-    /*align-self: center;*/
-    /*align-items: center;*/
 }
-
-
-/******************Besonderheiten fьr Bildschirmgroesse max. 768px**********************/
 
 @media (max-width: 768px) {
 
@@ -389,7 +380,6 @@ td, tr, th {
 
 }
 
-/*****************Besonderheiten fьr Bildschirmgroesse max. 480px***********************/
 
 @media (max-width: 480px) {
 
