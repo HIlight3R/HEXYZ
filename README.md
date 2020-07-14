@@ -1,51 +1,49 @@
-<h1 align="center">HEXYZ Project</h1>
+<h1 align="center">Проект HEXYZ</h1>
 
 <p align="center">
-	<img src="static/images/logo.png" alt="HEXYZ Project logo">
+	<img src="static/images/logo.png" alt="Логотип проекта HEXYZ">
 </p>
 
-<p align="center">Simple bank of virtual money - HEXYZ (HXZ).</p>
+<p align="center">Простой банк для виртуальной валюты - HEXYZ (HXZ).</p>
 
-## Info
-- This is a fun project.
-- This is not a real bank or a cryptobank.
-- This is not a cryptocurrency too.
+## Информация
+- Это развлекательный проект.
+- Это никак не банк или криптобанк.
+- Также это не криптовалюта.
 
-## Requirements
+## Системные требования
 
 ```
-PC or a mobile device with Termux
-The simplest CPU (1 GHz at least)
-About 256 MB of free RAM
-About 1 GB free space on disk
-Hand(s), palm(s) and finger(s)
-Brain and common sense
-Eye(s)
+Компьютер или телефон с приложением Termux, а лучше - VPS/VDS
+Немного свободного места на диске
+Прямые руки, растущие из правильного места
+Немного знаний работы с Windows/Linux и щепотка здравого смысла
 ```
 
 ```
 Windows >= 7
-OR
-Ubuntu >= 18.04
-OR
+ИЛИ
+Ubuntu Linux >= 18.04
+ИЛИ
 Linux Mint >= 18
-OR
-Other linux >= ¯\_(ツ)_/¯ (IDK versions, check for yourself)
-OR
-Android >= 6 (I recommend to use at least 7th version)
+ИЛИ
+Аналогичный Linux
+ИЛИ
+Android >= 6 (Я и разработчики Termux настоятельно рекомендуем использовать Android 7 и выше)
 ```
 
 ```
 Python >= 3.7
-Git (no matter what version, but preferably the latest (2.27 at the moment))
-Pip (no matter what version, but preferably the latest (20.1.1 at the moment))
+Git (без разницы какая версия, но желательно последняя (2.27 на данный момент))
+Pip (без разницы какая версия, но желательно последняя (20.1.1 на данный момент))
 Django >= 3.0.7
 Django-allauth >= 0.42.0
 Django-profiles >= 0.2
-All actual dependencies of the above libraries and programs.
+Все актуальные зависимости вышеперечисленных программ и библиотек.
 ```
 
-## How to run the website
+## Как запустить вебсайт HEXYZ
+В файле `./HEXYZ/settings.py` раскомментируйте 128-ю строку (уберите `# ` (хештэг + пробел) в начале строки).
 ```bash
 cd ~
 git clone https://github.com/hilight3r/HEXYZ.git
@@ -54,9 +52,36 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
-#here you will need to type your login, email and password to get access to control panel
+# Здесь Вас попросят ввести логин пароль и почту для аккаунта суперадминистратора
+python manage.py collectstatic
 python manage.py runserver
 ```
-  *If this commands don't work, try replace `python` to `python3` and/or `pip` to `pip3`*
-- You will find your website on `http://127.0.0.1:8000` by default. You can change IP and port of your server, added `ip:port` after `runsever` argument of the last command.
-- Control panel will be on `http://127.0.0.1:8000/admin`.
+Теперь верните все как было в файле `./HEXYZ/settings.py` (закомментируйте, т.е. добавьте `# ` (хештэг + пробел) в начале строки)
+  *Если команды не работают, попробуйте вводить `python3` вместо `python` и/или `pip3` вместо `pip`*.
+- По умолчанию вы найдете сайт на `http://127.0.0.1:8000`. Вы можете сменить IP адрес и порт сайта, добавив их в формате `ip:port` после аргумента `runsever` последней команды.
+- Админ панель сайта будет находиться по адресу `http://127.0.0.1:8000/admin`.
+- При внесении изменений в `.py` файлы проекта, сайт автоматически перезагружается.
+- Для остановки надо в терминале, где запущен сайт ввести сочетание клавиш `Ctrl+C`
+
+## Настройка сайта
+Сайт не требует детальной настройки, все и так готово к работе. Но есть моменты, которые очень важны для безопасности сайта.
+
+***Внимание!*** Перед выходом сайта в открытый доступ в Интернет, пожалуйста, в файле настроек сайта (`./HEXYZ/settings.py`) сделайте следующие изменения:
+- 22-я строка. Измените значение `SECRET_KEY`. Для этого воспользуйтесь [этим](https://djecrety.ir/) или [этим](https://passwordsgenerator.net/ru/?length=50&symbols=1&numbers=1&lowercase=1&uppercase=0&similar=0&ambiguous=1&client=1&autoselect=0) сервисом.
+- 25-я строка. Измените значение `DEBUG` с `True` на `False` (**с большой буквы**).
+- 27-я строка. В [квадратных скобках] добавьте в кавычках ('одинарных' или "двойных") через запятую все веб-адреса, которые будет обрабатывать Ваш сайт. Например `ALLOWED_HOSTS = ['mysite.ru', '.mysite.ru', '*.mysite.ru', 'www.mysite.ru', '123.45.67.89']`.
+    - В первом случае (`'mysite.ru'`), как и в последнем (`'123.45.67.89'`) все ясно. Сайт будет обрабатывать домен `mysite.ru` и IP адрес `123.45.67.89`.
+    - Во втором случае (`'.mysite.ru'`, отличается от первого точкой после открывающей кавычки) сайт будет обрабатывать все поддомены домена `mysite.ru` ***включая*** родительский домен `mysite.ru`.
+    - В третьем случае (`'*.mysite.ru'`, отличается от второго звездочкой перед точкой) сайт будет сайт будет обрабатывать все поддомены домена `mysite.ru` ***исключая*** родительский домен `mysite.ru`. Сама звездочка означает любое количество символов (от 0 до ∞).
+    - В четвертом случае (`'www.mysite.ru'`) сайт будет обрабатывать ***только*** поддомен `www.`, ***исключая*** все другие поддомены и родительский домен `mysite.ru`.
+    - Не рекомендуется настраивать параметр `ALLOWED_HOSTS` так, чтобы его элементы перекрывали друг друга (например, `ALLOWED_HOSTS = ['mysite.ru', '.mysite.ru']`, `'.mysite.ru'` включает в себя `'mysite.ru'`).
+    
+## Планы на будущее
+- [ ] Сделать возможность переводов и систему транзакций
+- [ ] Добавить регистрацию через соцсети (ВКонтакте и другие).
+- [ ] Добавить Captch'у на сайт.
+- [ ] Сделать интеграцию с валютами ВКонтакте (VK Coin, Bytecoin 2.0, VK Point и другие).
+- [ ] Сделать более гибкие профили, возможность продажи и покупки на валюты ВКонтакте.
+- [ ] Добавить ботов в Telegram и Discord для HEXYZ.
+- [ ] Сделать блог на сайте.
+- [ ] Сделать приложение-кошелек для HEXYZ.

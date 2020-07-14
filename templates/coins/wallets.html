@@ -1,59 +1,59 @@
 {% extends 'base.html' %}
 {% block head_title %}
-    List of users
+    Список пользователей
 {% endblock head_title %}
 {% block sidetext %}
     {% if user.is_authenticated %}
-        <h2>Howdy, {{ user.username }}!</h2>
+        <h2>Привет, {{ user.username }}!</h2>
         <div class="textboxrighttext">
             {% for wallet in wallet_list %}
                 {% if wallet.user.username == user.username %}
-                    <h1>Account info:</h1>
+                    <h1>Информация об аккаунте:</h1>
                     <ul>
-                        <li>Username: <b>{{ wallet.user.username }}</b></li>
-                        <li>Email: <a href="mailto:{{ wallet.user.email }}">{{ wallet.user.email }}</a></li>
-                        <li>Balance: {{ wallet.balance }} HXZ</li>
-                        <li>Registration datetime: {{ wallet.user.date_joined }}</li>
-                        <li>Account (Wallet) ID: <b>#{{ wallet.id }}</b></li>
+                        <li>Имя пользователя: <b>{{ wallet.user.username }}</b></li>
+                        <li>Адрес электронной почты: {{ wallet.user.email }}</li>
+                        <li>Баланс: {{ wallet.balance }} HXZ</li>
+                        <li>Дата и время регистрации: {{ wallet.user.date_joined }}</li>
+                        <li>ID аккаунта (кошелька): <b>#{{ wallet.id }}</b></li>
                     </ul>
-                    <h1>Service info:</h1>
+                    <h1>Информация о сервисе:</h1>
                     <ul>
-                        <li>Total accounts: {{ wallet_list|length }}</li>
+                        <li>Всего аккаунтов: {{ wallet_list|length }}</li>
                         {% if total_sum %}
-                            <li>Total balance: {{ total_sum|floatformat }} HXZ</li>
+                            <li>Общий баланс: {{ total_sum|floatformat }} HXZ</li>
                         {% else %}
-                            <li>Total balance: 0.0 HXZ</li>
+                            <li>Общий баланс: 0.0 HXZ</li>
                         {% endif %}
                     </ul>
                 {% endif %}
             {% endfor %}
         </div>
     {% else %}
-        <h2>Hello, Anonymous!</h2>
+        <h2>Здравствуй, гость!</h2>
         <div class="textboxrighttext">
-            <h1>Account info:</h1>
-            <p>You don't have account on this website! Please, <a title="Sign in" href="{% url 'account_login' %}">sign
-                in</a> or <a title="Sign up" href="{% url 'account_signup' %}">sign up</a>.</p>
-            <h1>Service info:</h1>
+            <h1>Информация об аккаунте:</h1>
+            <p>Вы не вошли в свой аккаунт на этом сайте! Пожалуйста, <a title="Войти" href="{% url 'account_login' %}">войдите</a>
+                или <a title="Регистрация" href="{% url 'account_signup' %}">зарегистрируйтесь</a>.</p>
+            <h1>Информация о сервисе:</h1>
             <ul>
-                <li>Total accounts: {{ wallet_list|length }}</li>
+                <li>Всего аккаунтов: {{ wallet_list|length }}</li>
                 {% if total_sum %}
-                    <li>Total balance: {{ total_sum|floatformat }} HXZ</li>
+                    <li>Общий баланс: {{ total_sum|floatformat }} HXZ</li>
                 {% else %}
-                    <li>Total balance: 0.0 HXZ</li>
+                    <li>Общий баланс: 0.0 HXZ</li>
                 {% endif %}
             </ul>
         </div>
     {% endif %}
 {% endblock sidetext %}
 {% block content %}
-    <h1>User's wallet list</h1>
+    <h1>Список пользователей</h1>
     <br>
     <table>
         <tr>
-            <th>Wallet ID / User ID</th>
-            <th>Username</th>
-            <th>Balance</th>
+            <th>ID</th>
+            <th>Имя пользователя</th>
+            <th>Баланс</th>
         </tr>
         {% for wallet in wallet_list %}
             <tr>

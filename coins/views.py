@@ -6,7 +6,7 @@ from .models import Wallet
 
 
 class WalletsView(View):
-    """Wallet view class"""
+    """Список кошельков на главной"""
 
     def get(self, request):
         wallets = Wallet.objects.all()
