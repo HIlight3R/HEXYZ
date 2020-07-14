@@ -143,6 +143,7 @@ nav ul a:focus {
 aside {
     width: 20%;
     float: right;
+    min-width: 200px !important;
 }
 
 aside h2 {
@@ -256,7 +257,7 @@ footer {
     font-size: 0.836em;
     line-height: 30px;
     background-image: linear-gradient(#FF7E28 0%, #FFB428 100%);
-    background-image: -webkit-linear-gradient(#FF7E28 0%, #FFB428 100%);
+    background-image: -webkit-linear-gradient(#FF7E28 0%, #FFB428 100%)
 }
 
 
@@ -361,6 +362,7 @@ td, tr, th {
     aside {
         width: 100%;
         float: none;
+        min-width: auto !important;
     }
 
     article {
