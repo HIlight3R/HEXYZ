@@ -186,7 +186,7 @@ article {
     margin-right: 21%;
     margin-top: 0;
     padding: 0 10px;
-    font-size: 0.813em;
+    font-size: 0.815em;
     font-weight: normal;
     text-align: left;
     line-height: 22px;
@@ -254,7 +254,7 @@ footer {
     height: 30px;
     text-align: center;
     border-radius: 5px;
-    font-size: 0.836em;
+    font-size: 0.85em;
     line-height: 30px;
     background-image: linear-gradient(#FF7E28 0%, #FFB428 100%);
     background-image: -webkit-linear-gradient(#FF7E28 0%, #FFB428 100%)
@@ -310,6 +310,35 @@ td, tr, th {
     border: #999999 2px solid;
     border-spacing: 10px;
     text-align: center;
+}
+
+.inputField {
+    width: 75%;
+    max-width: 50px;
+    background-color: #3A3A3A;
+    color: #FFFFFF;
+    border: #181818 solid 1px;
+    border-radius: 5px;
+    float: right;
+    margin-right: 10%;
+}
+
+.submitInput {
+    background-color: #3A3A3A;
+    color: #FFFFFF;
+    border: #181818 solid 1px;
+    border-radius: 8px;
+    width: 80%;
+    min-width: 150px;
+    height: 35px;
+}
+
+.submitInputPlace {
+    text-align: center;
+}
+
+.transferForm {
+    text-align: justify;
 }
 
 @media (max-width: 768px) {

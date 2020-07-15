@@ -8,7 +8,7 @@
         <div class="textboxrighttext">
             {% for wallet in wallet_list %}
                 {% if wallet.user.username == user.username %}
-                    <h1>Информация об аккаунте:</h1>
+                    <h1>Информация об аккаунте</h1>
                     <ul>
                         <li>Имя пользователя: <b>{{ wallet.user.username }}</b></li>
                         <li>Адрес электронной почты: {{ wallet.user.email }}</li>
@@ -16,7 +16,7 @@
                         <li>Дата и время регистрации: {{ wallet.user.date_joined }}</li>
                         <li>ID аккаунта (кошелька): <b>#{{ wallet.id }}</b></li>
                     </ul>
-                    <h1>Информация о сервисе:</h1>
+                    <h1>Информация о сервисе</h1>
                     <ul>
                         <li>Всего аккаунтов: {{ wallet_list|length }}</li>
                         {% if total_sum %}
@@ -25,13 +25,31 @@
                             <li>Общий баланс: 0.0 HXZ</li>
                         {% endif %}
                     </ul>
+                    <h1>Перевод средств</h1>
+                    <form action="./" method="post" class="transferForm">
+                        <div class="duet">
+                            <label for="id">ID: </label>
+                            <input type="number" placeholder="1" name="id" id="id" min="1"
+                                   max="{{ wallet_list|length }}" required class="inputField">
+                        </div>
+                        <br>
+                        <div class="duet">
+                            <label for="amount">Кол-во: </label>
+                            <input type="number" placeholder="0,000" name="amount" id="amount" step="0.001" min="0"
+                                   max="{{ wallet.balance }}" required class="inputField">
+                        </div>
+                        <br>
+                        {% csrf_token %}
+                        <div class="submitInputPlace">
+                            <button type="submit" class="submitInput">Отправить</button>
+                        </div>
+                    </form>
                 {% endif %}
             {% endfor %}
         </div>
     {% else %}
         <h2>Здравствуй, гость!</h2>
         <div class="textboxrighttext">
-            <h1>Информация об аккаунте:</h1>
             <p>Вы не вошли в свой аккаунт на этом сайте! Пожалуйста, <a title="Войти" href="{% url 'account_login' %}">войдите</a>
                 или <a title="Регистрация" href="{% url 'account_signup' %}">зарегистрируйтесь</a>.</p>
             <h1>Информация о сервисе:</h1>
@@ -40,7 +58,7 @@
                 {% if total_sum %}
                     <li>Общий баланс: {{ total_sum|floatformat }} HXZ</li>
                 {% else %}
-                    <li>Общий баланс: 0.0 HXZ</li>
+                    <li>Общий баланс: 0,0 HXZ</li>
                 {% endif %}
             </ul>
         </div>
