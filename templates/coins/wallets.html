@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load l10n %}
 {% block head_title %}
     Список пользователей
 {% endblock head_title %}
@@ -11,32 +12,34 @@
                     <h1>Информация об аккаунте</h1>
                     <ul>
                         <li>Имя пользователя: <b>{{ wallet.user.username }}</b></li>
-                        <li>Адрес электронной почты: {{ wallet.user.email }}</li>
+                        {% if wallet.user.email %}
+                            <li>Адрес электронной почты: {{ wallet.user.email }}</li>
+                        {% endif %}
                         <li>Баланс: {{ wallet.balance }} HXZ</li>
-                        <li>Дата и время регистрации: {{ wallet.user.date_joined }}</li>
-                        <li>ID аккаунта (кошелька): <b>#{{ wallet.id }}</b></li>
+                        <li>Дата и время регистрации: {{ wallet.user.date_joined|date:"d.m.y H:i:s" }}</li>
+                        <li>ID кошелька: <b>#{{ wallet.id }}</b></li>
                     </ul>
                     <h1>Информация о сервисе</h1>
                     <ul>
                         <li>Всего аккаунтов: {{ wallet_list|length }}</li>
                         {% if total_sum %}
-                            <li>Общий баланс: {{ total_sum|floatformat }} HXZ</li>
+                            <li>Общий баланс: {{ total_sum|floatformat:"3" }} HXZ</li>
                         {% else %}
-                            <li>Общий баланс: 0.0 HXZ</li>
+                            <li>Общий баланс: 0,000 HXZ</li>
                         {% endif %}
                     </ul>
                     <h1>Перевод средств</h1>
                     <form action="./" method="post" class="transferForm">
                         <div class="duet">
-                            <label for="id">ID: </label>
+                            <label for="id">ID кошелька: </label>
                             <input type="number" placeholder="1" name="id" id="id" min="1"
-                                   max="{{ wallet_list|length }}" required class="inputField">
+                                   max="{{ last_wallet.id }}" required class="inputField">
                         </div>
                         <br>
                         <div class="duet">
-                            <label for="amount">Кол-во: </label>
+                            <label for="amount">Количество: </label>
                             <input type="number" placeholder="0,000" name="amount" id="amount" step="0.001" min="0"
-                                   max="{{ wallet.balance }}" required class="inputField">
+                                   max="{{ wallet.balance|unlocalize }}" required class="inputField">
                         </div>
                         <br>
                         {% csrf_token %}
@@ -56,9 +59,9 @@
             <ul>
                 <li>Всего аккаунтов: {{ wallet_list|length }}</li>
                 {% if total_sum %}
-                    <li>Общий баланс: {{ total_sum|floatformat }} HXZ</li>
+                    <li>Общий баланс: {{ total_sum|floatformat:"3" }} HXZ</li>
                 {% else %}
-                    <li>Общий баланс: 0,0 HXZ</li>
+                    <li>Общий баланс: 0,000 HXZ</li>
                 {% endif %}
             </ul>
         </div>

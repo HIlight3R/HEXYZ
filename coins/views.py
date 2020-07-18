@@ -13,14 +13,12 @@ class WalletsView(View):
         wallets = Wallet.objects.all()
         totals = wallets.aggregate(Sum('balance'))
         total = totals.get('balance__sum')
-        return render(request, "coins/wallets.html", {"wallet_list": wallets, "total_sum": total})
+        last = Wallet.objects.last()
+        return render(request, "coins/wallets.html", {"wallet_list": wallets, "total_sum": total, "last_wallet": last})
 
     def post(self, request):
-        try:
-            sender = Wallet.objects.get(id=request.user.id)
-            receiver = Wallet.objects.get(id=int(request.POST.get("id")))
-        except:
-            return HttpResponse(status=400)
+        sender = Wallet.objects.get(id=request.user.id)
+        receiver = Wallet.objects.get(id=int(request.POST.get("id")))
         if sender is not None and receiver is not None and sender != receiver:
             if request.POST.get("amount", False):
                 amount = float(request.POST.get("amount"))
