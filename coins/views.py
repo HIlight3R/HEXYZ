@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 
-from .models import Wallet
+from .models import Wallet, Transfer
 
 
 class WalletsView(View):
@@ -11,10 +11,12 @@ class WalletsView(View):
 
     def get(self, request):
         wallets = Wallet.objects.all()
+        transfers = Transfer.objects.order_by("-id")
         totals = wallets.aggregate(Sum('balance'))
         total = totals.get('balance__sum')
         last = Wallet.objects.last()
-        return render(request, "coins/wallets.html", {"wallet_list": wallets, "total_sum": total, "last_wallet": last})
+        return render(request, "coins/wallets.html",
+                      {"wallet_list": wallets, "total_sum": total, "last_wallet": last, "transfer_list": transfers})
 
     def post(self, request):
         sender = Wallet.objects.get(id=request.user.id)
@@ -31,6 +33,7 @@ class WalletsView(View):
                     receiver.balance = rb
                     sender.save()
                     receiver.save()
+                    Transfer.objects.create(sender=sender, receiver=receiver, amount=amount)
                 else:
                     return HttpResponse(status=400)
             else:

@@ -84,4 +84,24 @@
             </tr>
         {% endfor %}
     </table>
+    <br>
+    <h1>Список последних переводов</h1>
+    <br>
+    <table>
+        <tr>
+            <th>От кого</th>
+            <th>Кому</th>
+            <th>Сколько</th>
+            <th>Когда</th>
+        </tr>
+        {% for transfer in transfer_list %}
+            <tr>
+                <td>{{ transfer.sender.id }}</td>
+                <td>{{ transfer.receiver.id }}</td>
+                <td>{{ transfer.amount }}</td>
+                <td>{{ transfer.datetime|date:"d.m.y H:i:s" }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
 {% endblock content %}
