@@ -16,5 +16,5 @@ class WalletAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.site_title = "Админка HEXYZ"
-admin.site.site_header = "Админ-панель HEXYZ"
+admin.site.site_title = "АП HEXYZ"
+admin.site.site_header = "HEXYZ"
