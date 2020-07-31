@@ -29,7 +29,7 @@
                         {% endif %}
                     </ul>
                     <h1>Перевод средств</h1>
-                    <form action="./" method="post" class="transferForm">
+                    <form action="{% url "transfer" %}" method="post" class="transferForm">
                         <div class="duet">
                             <label for="id">ID кошелька: </label>
                             <input type="number" placeholder="1" name="id" id="id" min="1"
@@ -58,11 +58,7 @@
             <h1>Информация о сервисе:</h1>
             <ul>
                 <li>Всего аккаунтов: {{ wallet_list|length }}</li>
-                {% if total_sum %}
-                    <li>Общий баланс: {{ total_sum|floatformat:"3" }} HXZ</li>
-                {% else %}
-                    <li>Общий баланс: 0,000 HXZ</li>
-                {% endif %}
+                <li>Общий баланс: {{ total_sum|floatformat:"3" }} HXZ</li>
             </ul>
         </div>
     {% endif %}
@@ -102,6 +98,5 @@
                 <td>{{ transfer.datetime|date:"d.m.y H:i:s" }}</td>
             </tr>
         {% endfor %}
-
     </table>
 {% endblock content %}

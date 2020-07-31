@@ -1,6 +1,5 @@
 from django.db.models import Sum
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic.base import View
 
 from .models import Wallet, Transfer
@@ -18,26 +17,24 @@ class WalletsView(View):
         return render(request, "coins/wallets.html",
                       {"wallet_list": wallets, "total_sum": total, "last_wallet": last, "transfer_list": transfers})
 
+
+class TransferView(View):
     def post(self, request):
         sender = Wallet.objects.get(id=request.user.id)
-        receiver = Wallet.objects.get(id=int(request.POST.get("id")))
-        if sender is not None and receiver is not None and sender != receiver:
-            if request.POST.get("amount", False):
-                amount = float(request.POST.get("amount"))
-                if amount <= float(sender.balance):
-                    sb = float(sender.balance)
-                    rb = float(receiver.balance)
-                    sb -= amount
-                    rb += amount
-                    sender.balance = sb
-                    receiver.balance = rb
-                    sender.save()
-                    receiver.save()
-                    Transfer.objects.create(sender=sender, receiver=receiver, amount=amount)
-                else:
-                    return HttpResponse(status=400)
+        try:
+            receiver = Wallet.objects.get(id=int(request.POST.get("id")))
+        except:
+            return render(request, "coins/transfer.html", {"successfully": False, "reason": "user_does_not_exist_error"})
+        if sender is not None and receiver is not None and sender != receiver and request.POST.get("amount", False):
+            amount = float(request.POST["amount"])
+            if amount <= float(sender.balance):
+                sender.balance = float(sender.balance) - amount
+                receiver.balance = float(receiver.balance) + amount
+                sender.save()
+                receiver.save()
+                Transfer.objects.create(sender=sender, receiver=receiver, amount=amount)
             else:
-                return HttpResponse(status=400)
+                return render(request, "coins/transfer.html", {"successfully": False, "reason": "low_balance_error"})
         else:
-            return HttpResponse(status=400)
-        return redirect('./')
+            return render(request, "coins/transfer.html", {"successfully": False, "reason": "incorrect_request_error"})
+        return render(request, "coins/transfer.html", {"successfully": True, "reason": None})
