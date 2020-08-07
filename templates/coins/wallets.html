@@ -15,10 +15,11 @@
                         {% if wallet.user.email %}
                             <li>Адрес электронной почты: {{ wallet.user.email }}</li>
                         {% endif %}
-                        <li>Баланс: {{ wallet.balance }} HXZ</li>
-                        <li>Дата и время регистрации: {{ wallet.user.date_joined|date:"d.m.y H:i:s" }}</li>
-                        <li>ID кошелька: <b>#{{ wallet.id }}</b></li>
+                        <li>Баланс: <b>{{ wallet.balance }} HXZ</b></li>
+                        <li>Зарегистрирован(а): {{ wallet.user.date_joined|date:"d.m.y H:i:s" }}</li>
+                        <li>ID: <b>#{{ wallet.id }}</b></li>
                     </ul>
+                    <hr>
                     <h1>Информация о сервисе</h1>
                     <ul>
                         <li>Всего аккаунтов: {{ wallet_list|length }}</li>
@@ -28,27 +29,41 @@
                             <li>Общий баланс: 0,000 HXZ</li>
                         {% endif %}
                     </ul>
-                    <h1>Перевод средств</h1>
-                    <form action="{% url "transfer" %}" method="post" class="transferForm">
-                        <div class="duet">
-                            <label for="id">ID кошелька: </label>
-                            <input type="number" placeholder="1" name="id" id="id" min="1"
-                                   max="{{ last_wallet.id }}" required class="inputField">
-                        </div>
-                        <br>
-                        <div class="duet">
-                            <label for="amount">Количество: </label>
-                            <input type="number" placeholder="0,000" name="amount" id="amount" step="0.001" min="0"
-                                   max="{{ wallet.balance|unlocalize }}" required class="inputField">
-                        </div>
-                        <br>
-                        {% csrf_token %}
-                        <div class="submitInputPlace">
-                            <button type="submit" class="submitInput">Отправить</button>
-                        </div>
-                    </form>
                 {% endif %}
             {% endfor %}
+            <hr>
+            <h1>Перевод средств</h1>
+            <form action="{% url "transfer" %}" method="post" class="mainForm">
+                <div class="duet">
+                    <label for="id">ID кошелька: </label>
+                    <input type="number" placeholder="1" name="id" id="id" min="1"
+                           max="{{ last_wallet.id }}" required class="inputField">
+                </div>
+                <br>
+                <div class="duet">
+                    <label for="amount">Количество: </label>
+                    <input type="number" placeholder="0,000" name="amount" id="amount" step="0.001" min="0"
+                           max="{{ wallet.balance|unlocalize }}" required class="inputField">
+                </div>
+                <br>
+                {% csrf_token %}
+                <div class="submitInputPlace">
+                    <button type="submit" class="submitInput">Отправить</button>
+                </div>
+            </form>
+            <hr>
+            <h1>Применение промокода</h1>
+            <form action="{% url "promocode" %}" method="post" class="mainForm">
+                <div class="duet">
+                    <label for="key">Промокод: </label>
+                    <input type="text" id="key" maxlength="16" name="key" placeholder="SOME16CHARACTERS" required class="inputFieldAlt">
+                </div>
+                <br>
+                {% csrf_token %}
+                <div class="submitInputPlace">
+                    <button type="submit" class="submitInput">Применить код</button>
+                </div>
+            </form>
         </div>
     {% else %}
         <h2>Здравствуй, гость!</h2>

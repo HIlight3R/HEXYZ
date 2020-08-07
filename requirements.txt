@@ -1,4 +1,4 @@
 django
 django-allauth
 django-profiles
-https://github.com/darklow/django-suit/tarball/v2
+django-grappelli

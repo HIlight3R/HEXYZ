@@ -321,15 +321,23 @@ td, tr, th {
     padding-left: 10px;
 }
 
-.inputField {
-    width: 75%;
-    max-width: 100px;
+.inputField, .inputFieldAlt {
     background-color: #3A3A3A;
     color: #FFFFFF;
     border: #181818 solid 1px;
     border-radius: 5px;
     float: right;
     text-align: center;
+}
+
+.inputField {
+    width: 75%;
+    max-width: 100px;
+}
+
+.inputFieldAlt {
+    width: 75%;
+    max-width: 150px;
 }
 
 .submitInput {
@@ -346,7 +354,7 @@ td, tr, th {
     text-align: center;
 }
 
-.transferForm {
+.mainForm {
     text-align: justify;
 }
 
