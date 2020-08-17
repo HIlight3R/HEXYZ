@@ -36,7 +36,7 @@ class PromoCodeAdmin(admin.ModelAdmin):
     list_display_links = ("id", "key")
     list_editable = ("amount", "is_applied")
     list_search = ("id", "key")
-    readonly_fields = ("id", "key")
+    readonly_fields = ("id",)
     fieldsets = (
         (None, {
             "fields": (("key", "amount"), ("id", "is_applied"))
