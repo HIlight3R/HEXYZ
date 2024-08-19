@@ -23,7 +23,7 @@
 - `django-profiles` compatible with Django version
 - `django-grappelli` compatible with Django version
 
-## HOW to launch HEXYZ?
+## How to launch HEXYZ?
 - In the `HEXYZ/settings.py` file, uncomment the line containing the `STATIC_ROOT` constant.
 - Run in your shell:
   ```bash
