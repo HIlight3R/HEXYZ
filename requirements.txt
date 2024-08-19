@@ -1,4 +1,4 @@
 django
 django-allauth
 django-profiles
-django-grappelli
+django-grappelli==4.0.1
