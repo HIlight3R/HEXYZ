@@ -1,4 +1,4 @@
 django
-django-allauth
+django-allauth==64.1.0
 django-profiles
 django-grappelli
