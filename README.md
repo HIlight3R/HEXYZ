@@ -1,86 +1,63 @@
-# ПРОЕКТ ЗАКРЫТ, ДАЛЬНЕЙШАЯ РАЗРАБОТКА НЕ ПЛАНИРУЕТСЯ!
-<h1 align="center">Проект HEXYZ</h1>
+# THE PROJECT IS CLOSED, NO FURTHER DEVELOPMENT IS PLANNED!
 
 <p align="center">
 	<img src="static/images/logo.png" alt="Логотип проекта HEXYZ">
 </p>
 
-<p align="center">Простой банк для виртуальной валюты - HEXYZ (HXZ).</p>
+<p align="center">A simple demonstration of Python Django v3 using a simple virtual bank as an example.</p>
+<p align="center">This project was created during my learning of the framework, so don't judge it too harshly.</p>
 
-<p align="center">
-	<img src="https://img.shields.io/github/license/hilight3r/HEXYZ?label=%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F" alt="Лицензия">
-	<br>
-	<img src="https://img.shields.io/github/stars/hilight3r/HEXYZ?label=%D0%97%D0%B2%D0%B5%D0%B7%D0%B4%D1%8B" alt="Звезды">
-	<img src="https://img.shields.io/github/watchers/hilight3r/HEXYZ?label=%D0%9F%D1%80%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80%D1%8B" alt="Просмотры">
-	<img src="https://img.shields.io/github/forks/hilight3r/HEXYZ?label=%D0%9E%D1%82%D0%B2%D0%B5%D1%82%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F" alt="Ответвления">
-	<hr>
-</p>
+## Info
+- This is just a demo project.
+- This is not a real banking system.
+- It is dangerous to use if you want to use it for real money or cryptocurrencies.
+- HEXYZ is not a cryptocurrency.
 
-## Информация
-- Это развлекательный проект.
-- Это никак не банк или криптобанк.
-- Также это не криптовалюта.
+## System requirements
 
-## Системные требования
+- Python (version 3.7 or newer)
+- Git
+- PIP
+- `python-django` (version 3.*)
+- `django-allauth` compatible with Django version
+- `django-profiles` compatible with Django version
+- `django-grappelli` compatible with Django version
 
-```
-ПК, или Android + Termux, или VPS/VDS с актуальной ОС
-Python >= 3.7
-Git последней версии
-Pip последней версии
-python-django 3-ей версии и выше
-django-allauth, совместимый с версией Django
-django-profiles, совместимый с версией Django
-django-grappelli, совместимый с версией Django
-Все актуальные зависимости вышеперечисленных программ и библиотек.
-```
+## HOW to launch HEXYZ?
+- In the `HEXYZ/settings.py` file, uncomment the line containing the `STATIC_ROOT` constant.
+- Run in your shell:
+  ```bash
+  git clone https://github.com/HIlight3R/HEXYZ.git
+  cd HEXYZ
+  pip install -r requirements.txt
+  python manage.py makemigrations
+  python manage.py migrate
+  python manage.py createsuperuser
+  # Here you will be asked to enter your login, password and email for the superuser account.
+  python manage.py collectstatic
+  python manage.py runserver
+  ```
+  *If the commands don't work, try using `python3` or `py -3` instead of `python` and `pip3` instead of `pip`*.
+  *If you get errors when starting, comment out the line with the `STATIC_ROOT` constant in `HEXYZ/settings.py`*.
+- By default, the site will be available at `http://127.0.0.1:8000`. You can change the IP address and port of the site by adding them in the format `ip:port` after the `runsever` argument of the last command. You can also make your site listen on all IPs available to you by using the format `0.0.0.0:port`.
+- The site's admin panel will be located at `http://ip:port/admin` (by default `http://127.0.0.1:8000/admin`).
+- When making changes to the `.py` project files, the site automatically reloads.
+- To stop, enter the key combination `Ctrl+C` in the terminal where the HEXYZ is running.
 
-## Как запустить вебсайт HEXYZ
-В файле `./HEXYZ/settings.py` раскомментируйте 129-ю строку (уберите `# ` (хештэг + пробел) в начале строки).
-```bash
-git clone https://github.com/hilight3r/HEXYZ.git
-cd HEXYZ
-pip install -r requirements.txt
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
-# Здесь Вас попросят ввести логин пароль и почту для аккаунта суперадминистратора
-python manage.py collectstatic
-python manage.py runserver
-```
-Теперь верните все как было в файле `./HEXYZ/settings.py` (закомментируйте, т.е. добавьте `# ` (хештэг + пробел) в начале строки)
-  *Если команды не работают, попробуйте вводить `python3` вместо `python` и/или `pip3` вместо `pip`*.
-- По умолчанию Вы найдете сайт на `http://127.0.0.1:8000`. Вы можете сменить IP адрес и порт сайта, добавив их в формате `ip:port` после аргумента `runsever` последней команды. Также Вы можете заставить Ваш сайт прослушивать все IP, доступные Вашему ПК, Телефону или серверу используя формат `0.0.0.0:port`.
-- Админ панель сайта будет находиться по адресу `http://127.0.0.1:8000/admin`.
-- При внесении изменений в `.py` файлы проекта, сайт автоматически перезагружается.
-- Для остановки надо в терминале, где запущен сайт ввести сочетание клавиш `Ctrl+C`.
+## Setting up a site for production
+The site does not require detailed configuration, everything is ready to work. But there are moments that are very important for the site's security.
 
-## Настройка сайта
-Сайт не требует детальной настройки, все и так готово к работе. Но есть моменты, которые очень важны для безопасности сайта.
+***Attention!*** Before publishing the site to the public Internet, please make the following changes in the site settings file `HEXYZ/settings.py`:
+- Change the value of `SECRET_KEY` to your own and do not publish it to the public. To do this, use [this](https://djecrety.ir) service to generate it.
+- Change the value of `DEBUG` to `False`.
+- In [square brackets], add in quotation marks ('single' or "double"), separated by commas, all web addresses that your site will process, assigning the list to the constant `ALLOWED_HOSTS`. For example, `ALLOWED_HOSTS = ['example.org', '.example.org', '*.example.org', 'subdomain.example.org', '123.45.67.89']`.
+- In the cases of 'example.org'` and `'123.45.67.89'` everything is clear. The site will process the corresponding domain and IP address.
+- In the case of `'.example.org'` (note the dot at the beginning), the site will process all subdomains of the domain __including__ the domain itself.
+- In the case of `'*.example.org'`, the site will process all subdomains of the domain ***excluding*** the domain `mysite.ru` itself.
+- In the fourth case (`'subdomain.example.org'`), the site will process ***only*** the subdomain, ***excluding*** the domain itself.
+- It is not recommended to configure the `ALLOWED_HOSTS` parameter so that its elements overlap each other (for example, `ALLOWED_HOSTS = ['example.org', '.example.org']` (`'.example.org'` already includes `'example.org'`).
+- For distributing static files in production, Django recommends using Nginx. For correct operation, use MacOS or Linux, on Windows, Nginx may cause undefined behavior.
+- If for some reason you cannot or do not want to use Nginx, then use the `--insecure` flag at the end of the `python manage.py runserver ...` command. However, note that Django does not recommend doing this.
 
-***Внимание!*** Перед выходом сайта в открытый доступ в Интернет, пожалуйста, в файле настроек сайта (`./HEXYZ/settings.py`) сделайте следующие изменения:
-- 22-я строка. Измените значение `SECRET_KEY`. Для этого воспользуйтесь [этим](https://djecrety.ir/) или [этим](https://passwordsgenerator.net/ru/?length=50&symbols=1&numbers=1&lowercase=1&uppercase=0&similar=0&ambiguous=1&client=1&autoselect=0) сервисом.
-- 25-я строка. Измените значение `DEBUG` с `True` на `False` (**с большой буквы**).
-- 27-я строка. В [квадратных скобках] добавьте в кавычках ('одинарных' или "двойных") через запятую все веб-адреса, которые будет обрабатывать Ваш сайт. Например `ALLOWED_HOSTS = ['mysite.ru', '.mysite.ru', '*.mysite.ru', 'www.mysite.ru', '123.45.67.89']`.
-    - В первом случае (`'mysite.ru'`), как и в последнем (`'123.45.67.89'`) все ясно. Сайт будет обрабатывать домен `mysite.ru` и IP адрес `123.45.67.89`.
-    - Во втором случае (`'.mysite.ru'`, отличается от первого точкой после открывающей кавычки) сайт будет обрабатывать все поддомены домена `mysite.ru` ***включая*** родительский домен `mysite.ru`.
-    - В третьем случае (`'*.mysite.ru'`, отличается от второго звездочкой перед точкой) сайт будет сайт будет обрабатывать все поддомены домена `mysite.ru` ***исключая*** родительский домен `mysite.ru`. Сама звездочка означает любое количество символов (от 0 до ∞).
-    - В четвертом случае (`'www.mysite.ru'`) сайт будет обрабатывать ***только*** поддомен `www.`, ***исключая*** все другие поддомены и родительский домен `mysite.ru`.
-    - Не рекомендуется настраивать параметр `ALLOWED_HOSTS` так, чтобы его элементы перекрывали друг друга (например, `ALLOWED_HOSTS = ['mysite.ru', '.mysite.ru']`, `'.mysite.ru'` включает в себя `'mysite.ru'`).
-- Для раздачи статических файлов (CSS, JavaScript, изображения) и медиафайлов (видео и аудио, не используется в этом проекте) Django рекомендуют использовать Nginx. Руководство по настройке [тут](https://webdevblog.ru/razvertyvanie-prilozheniya-na-django-s-uwsgi-i-nginx-v-proizvodstvennoj-srede/) (для корректной работы используйте MacOS или Linux).
-- Если Вы по какой-либо причине не можете или не хотите использовать Nginx, то используйте флаг `--insecure` в конце команды `python manage.py runserver ...`.
-    
-## Планы на будущее
-- [x] ~~Сделать возможность переводов.~~
-- [x] ~~Сделать систему транзакций.~~
-- [x] ~~Сделать систему промокодов~~
-- [ ] ~~Добавить регистрацию через соцсети (ВКонтакте и другие).~~
-- [ ] ~~Добавить Captch'у на сайт.~~
-- [ ] ~~Сделать интеграцию с валютами ВКонтакте (VK Coin, Bytecoin 2.0, VK Point и другие).~~
-- [ ] ~~Сделать более гибкие профили, возможность продажи и покупки на валюты ВКонтакте.~~
-- [ ] ~~Добавить ботов в Telegram и Discord для HEXYZ.~~
-- [ ] ~~Сделать блог на сайте.~~
-- [ ] ~~Сделать приложение-кошелек для HEXYZ.~~
-
-# Проект заброшен на неопределеныый срок!
-## Сейчас ведется разработка другого проекта: [Dominator](https://github.com/hilight3r/Dominator).
+## License
+The project is licensed under the free open source license MIT. You can read it in the `LICENSE` file in the root of the project. Please note that the license does not provide any guarantees at all and requires copyright to be indicated when copying the project.
